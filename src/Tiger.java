@@ -19,29 +19,36 @@ public class Tiger
     // handle command line arguments
     CommandLine cmd = new CommandLine();
     String fname = cmd.scan(args);
-
+ 	System.out.println("what is outup?");
     // /////////////////////////////////////////////
-    // the straight-line interpreter (and compiler)    
-    switch (Control.ConSlp.action){
+    // the straight-line interpreter (and compiler)   
+    slp.Main slpmain = new slp.Main();
+   switch (Control.ConSlp.action){
     case NONE:
-      System.exit(0);
+//    	System.out.println("what is outup?");
+//      System.exit(0);
       break;
-    default:
-      slp.Main slpmain = new slp.Main();
-      if (Control.ConSlp.div) {
-        slpmain.doit(slp.Samples.dividebyzero);
-        System.exit(0);
-      }
-      slpmain.doit(slp.Samples.prog);
-      System.exit(0);
-    }
-
-    
-    if (fname == null) {
-      cmd.usage();
-      return;
-    }
-
+    case ARGS:
+    	 slpmain.doit(slp.Samples.prog);
+    	 System.exit(0);
+//    	break;
+   case INTERP:
+	   	 slpmain.doit(slp.Samples.prog);
+    	 System.exit(0);
+//    	break;
+    default: 	   	 
+//      if (Control.ConSlp.div) {
+//        slpmain.doit(slp.Samples.dividebyzero); 
+//        System.exit(0);
+//      }
+//      slpmain.doit(slp.Samples.prog);
+//      System.exit(0);
+    }  
+   if (fname == null) {
+       cmd.usage();
+       return;
+     }
+//   	System.out.println("what is outup?");
     // /////////////////////////////////////////////////////
     // it would be helpful to be able to test the lexer
     // independently.

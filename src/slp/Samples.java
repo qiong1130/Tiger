@@ -22,6 +22,6 @@ public class Samples
 
   public static Stm.T dividebyzero =
       new Print (new Last (new Op(Exp.OP_T.DIVIDE, new Num (1), new Num(0))));
-  
+ // public static Stm.T prog1 = new Compound(new Assign("a",new Op(Exp.OP_T.ADD,new Num(2),new Num(3))),new Assign("b",new Op(Exp.OP_T.ADD,new Num(4),new Num(4))));
   
 }
