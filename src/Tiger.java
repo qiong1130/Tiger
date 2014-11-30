@@ -23,6 +23,7 @@ public class Tiger
     // handle command line arguments
     CommandLine cmd = new CommandLine();
     String fname = cmd.scan(args);
+<<<<<<< HEAD
 
     // /////////////////////////////////////////////////////
     // to test the pretty printer on the "test/Fac.java" program
@@ -39,6 +40,38 @@ public class Tiger
       return;
     }
 
+=======
+ 	System.out.println("what is outup?");
+    // /////////////////////////////////////////////
+    // the straight-line interpreter (and compiler)   
+    slp.Main slpmain = new slp.Main();
+   switch (Control.ConSlp.action){
+    case NONE:
+//    	System.out.println("what is outup?");
+//      System.exit(0);
+      break;
+    case ARGS:
+    	 slpmain.doit(slp.Samples.prog);
+    	 System.exit(0);
+//    	break;
+   case INTERP:
+	   	 slpmain.doit(slp.Samples.prog);
+    	 System.exit(0);
+//    	break;
+    default: 	   	 
+//      if (Control.ConSlp.div) {
+//        slpmain.doit(slp.Samples.dividebyzero); 
+//        System.exit(0);
+//      }
+//      slpmain.doit(slp.Samples.prog);
+//      System.exit(0);
+    }  
+   if (fname == null) {
+       cmd.usage();
+       return;
+     }
+//   	System.out.println("what is outup?");
+>>>>>>> Lab1
     // /////////////////////////////////////////////////////
     // it would be helpful to be able to test the lexer
     // independently.

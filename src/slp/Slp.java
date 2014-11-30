@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Slp
 {
-  // ////////////////////////////////////////////////
+  // /////////////////////////new Todo();new Todo();new Todo();///////////////////////
   // expression
   public static class Exp
   {
@@ -36,13 +36,14 @@ public class Slp
     }
 
     // op
-    public enum OP_T
-    {
+    public static enum OP_T
+	{
       ADD, SUB, TIMES, DIVIDE
     };
 
     public static class Op extends T
     {
+    	
       OP_T op;
       public T left;
       public T right;
@@ -152,5 +153,6 @@ public class Slp
     }
 
   }// end of statement
+
 
 }

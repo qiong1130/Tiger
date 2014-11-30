@@ -1,5 +1,7 @@
 package lexer;
 
+import util.Todo.Errorkind;
+
 public class Token
 {
   // Lab 1, exercise 1: read the MiniJava specification
@@ -59,18 +61,19 @@ public class Token
   public Kind kind; // kind of the token
   public String lexeme; // extra lexeme for this token, if any
   public Integer lineNum; // on which line of the source file this token appears
-
+  public Integer columnNum;
   // Some tokens don't come with lexeme but 
   // others do.
-  public Token(Kind kind, Integer lineNum)
+  public Token(Kind kind, Integer lineNum,Integer columnNum)
   {
     this.kind = kind;
     this.lineNum = lineNum;
+    this.columnNum = columnNum;
   }
 
-  public Token(Kind kind, Integer lineNum, String lexeme)
+  public Token(Kind kind, Integer lineNum, Integer columnNum, String lexeme)
   {
-    this(kind, lineNum);
+    this(kind, lineNum, columnNum);
     this.lexeme = lexeme;
   }
 
@@ -81,7 +84,7 @@ public class Token
 
     // to check that the "lineNum" field has been properly set.
     if (this.lineNum == null)
-      new util.Todo();
+      new util.Todo(Errorkind.lineNum,this.lineNum,this.columnNum);
 
     s = ": " + ((this.lexeme == null) ? "<NONE>" : this.lexeme) + " : at line "
         + this.lineNum.toString();
