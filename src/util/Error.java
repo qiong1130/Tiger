@@ -1,8 +1,8 @@
 package util;
 
-public class Bug
+public class Error
 {
-  public Bug()
+  public static void bug()
   {
     throw new java.lang.Error("Compiler bug");
   }

@@ -1,24 +1,20 @@
 package elaborator;
 
-import java.util.Hashtable;
-
-import ast.Ast.Type;
-
 public class ClassBinding
 {
   public String extendss; // null for non-existing extends
-  public java.util.Hashtable<String, Type.T> fields;
+  public java.util.Hashtable<String, ast.Ast.Type.T> fields;
   public java.util.Hashtable<String, MethodType> methods;
 
   public ClassBinding(String extendss)
   {
     this.extendss = extendss;
-    this.fields = new Hashtable<String, Type.T>();
-    this.methods = new Hashtable<String, MethodType>();
+    this.fields = new java.util.Hashtable<String, ast.Ast.Type.T>();
+    this.methods = new java.util.Hashtable<String, MethodType>();
   }
 
   public ClassBinding(String extendss,
-      java.util.Hashtable<String, Type.T> fields,
+      java.util.Hashtable<String, ast.Ast.Type.T> fields,
       java.util.Hashtable<String, MethodType> methods)
   {
     this.extendss = extendss;
@@ -26,7 +22,7 @@ public class ClassBinding
     this.methods = methods;
   }
 
-  public void put(String xid, Type.T type)
+  public void put(String xid, ast.Ast.Type.T type)
   {
     if (this.fields.get(xid) != null) {
       System.out.println("duplicated class field: " + xid);
