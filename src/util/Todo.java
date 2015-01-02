@@ -3,11 +3,12 @@ package util;
 public class Todo {
 
 	public enum ErrorKind {
-		error, // �Ƿ��ַ�
-		lineNum, // �к�Ϊ��
-		columnNum, // �Ƿ���ʶ��
+		error,
+		lineNum, 
+		columnNum,
 		ERROR_,
 	}
+
 
 	public ErrorKind error;// kind of error
 	public Integer lineNum;// on which line of the source file this token

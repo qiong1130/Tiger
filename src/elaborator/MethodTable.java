@@ -31,12 +31,10 @@ public class MethodTable {
 		}
 
 	}
-
 	// return null for non-existing keys
 	public ast.Ast.Type.T get(String id) {
 		return this.table.get(id);
 	}
-
 	public void dump() {
 
 		for (Iterator<String> itr = this.table.keySet().iterator(); itr

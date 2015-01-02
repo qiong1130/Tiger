@@ -53,15 +53,15 @@ public class Lexer {
 					columnno += 7;
 				}
 				c = this.fstream.read();
-				columnno++;//ÿ�ζ�һ���ַ����кż�1
+				columnno++;
 			}
 			if (-1 == c)//�ļ�������־
 				return new Token(Kind.TOKEN_EOF, lineno, columnno);
-			if (isdigit(c)) {//�жϵ�ǰ�ַ��Ƿ�Ϊ�����ַ�
+			if (isdigit(c)) {
 				columnno++;
 				cur_column = columnno;
 				tokenval = c - '0';
-				this.fstream.mark(1);//��ǵ�ǰ��ȡ���ַ���Ϊ1
+				this.fstream.mark(1);
 				c = this.fstream.read();
 				while (isdigit(c)) {
 					columnno++;
@@ -69,16 +69,16 @@ public class Lexer {
 					this.fstream.mark(1);
 					c = this.fstream.read();
 				}
-				if (isalpha(c)) {//�жϵ�ǰ�ַ��Ƿ�Ϊ��ĸ
+				if (isalpha(c)) {
 					new Todo(ErrorKind.columnNum, lineno, columnno);
 					return null;
 				}
-				this.fstream.reset();//���ļ�ָ�뷵�ص���һ�α�Ǵ�
+				this.fstream.reset();
 				columnno--;
 				return new Token(Kind.TOKEN_NUM, lineno, cur_column,
 						Integer.toString(tokenval));
 			}
-			if (isalpha(c)) {//�жϵ�ǰ�ַ��Ƿ�Ϊ��ĸ
+			if (isalpha(c)) {
 				cur_column = columnno;
 				lexbuf = "";
 				while (isalpha(c) || isdigit(c)) {
@@ -217,7 +217,7 @@ public class Lexer {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		if (control.Control.lex)
+		if (control.Control.dumpAst)
 			System.out.println(t.toString());
 		return t;
 	}

@@ -1,16 +1,16 @@
 package util;
 
-public class Temp
-{
-  private static int count = 0;
+public class Temp {
 
-  private Temp()
-  {
-  }
+	public static int num = 0;
 
-  // Factory pattern
-  public static String next()
-  {
-    return "x_" + (Temp.count++);
-  }
+	public Temp() {
+		num++;
+	}
+
+	@Override
+	public String toString() {
+		return "temp_" + num;
+	}
+
 }

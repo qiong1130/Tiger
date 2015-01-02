@@ -16,7 +16,7 @@ public class MethodType {
 			ast.Ast.Dec.DecSingle decc = (ast.Ast.Dec.DecSingle) dec;
 			s = decc.type.toString() + "* " + s;
 		}
-		s = "����:" + s + ", return:" + this.retType.toString();
+		s = s + " -> " + this.retType.toString();
 		return s;
 	}
 }

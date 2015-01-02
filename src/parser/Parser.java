@@ -1,12 +1,9 @@
 package parser;
 
-import java.util.LinkedList;
-
+import ast.Ast.Stm;
 import lexer.Lexer;
 import lexer.Token;
 import lexer.Token.Kind;
-import ast.Ast.MainClass.MainClassSingle;
-
 
 public class Parser {
 	Lexer lexer;
@@ -64,8 +61,7 @@ public class Parser {
 	// ->
 	// ExpRest -> , Exp
 	private java.util.LinkedList<ast.Ast.Exp.T> parseExpList() {
-		java.util.LinkedList<ast.Ast.Exp.T> exp_list 
-		= new java.util.LinkedList<ast.Ast.Exp.T>();
+		java.util.LinkedList<ast.Ast.Exp.T> exp_list = new java.util.LinkedList<ast.Ast.Exp.T>();
 		if (current.kind == Kind.TOKEN_RPAREN)
 			return exp_list;
 		ast.Ast.Exp.T exp = parseExp();
@@ -97,7 +93,7 @@ public class Parser {
 		case TOKEN_NUM:
 			String num = current.lexeme;
 			advance();
-			return new ast.Ast.Exp.Num(Integer.valueOf(num));
+			return new ast.Ast.Exp.Num(10);
 		case TOKEN_FALSE:
 			advance();
 			return new ast.Ast.Exp.False();
@@ -169,7 +165,7 @@ public class Parser {
 	// TimesExp -> ! TimesExp
 	// -> NotExp
 	private ast.Ast.Exp.T parseTimesExp() {
-		// ast.exp.T not_exp = parseNotExp();
+		// ast.Ast.Exp.T not_exp = parseNotExp();
 		ast.Ast.Exp.T times_exp;
 		if (current.kind != Kind.TOKEN_NOT) {
 			return parseNotExp();
@@ -239,7 +235,7 @@ public class Parser {
 	private ast.Ast.Stm.T parseStatement() {
 		switch (current.kind) {
 		case TOKEN_LBRACE: {
-			java.util.LinkedList<ast.Ast.Stm.T> stms = new java.util.LinkedList<ast.Ast.Stm.T>();
+			java.util.LinkedList<Stm.T> stms = new java.util.LinkedList<Stm.T>();
 			advance();
 			while (current.kind == Kind.TOKEN_LBRACE
 					|| current.kind == Kind.TOKEN_IF
@@ -318,7 +314,7 @@ public class Parser {
 
 	// Statements -> Statement Statements
 	// ->
-	private LinkedList<ast.Ast.Stm.T> parseStatements() {
+	private java.util.LinkedList<ast.Ast.Stm.T> parseStatements() {
 		java.util.LinkedList<ast.Ast.Stm.T> stms = new java.util.LinkedList<ast.Ast.Stm.T>();
 		while (current.kind == Kind.TOKEN_LBRACE
 				|| current.kind == Kind.TOKEN_IF
@@ -463,7 +459,7 @@ public class Parser {
 
 			}
 		}
-		LinkedList<ast.Ast.Stm.T> stms_1 = parseStatements();
+		java.util.LinkedList<ast.Ast.Stm.T> stms_1 = parseStatements();
 		stms.addAll(stms_1);
 		eatToken(Kind.TOKEN_RETURN);
 		ast.Ast.Exp.T retExp = parseExp();
@@ -525,7 +521,7 @@ public class Parser {
 	// Statement
 	// }
 	// }
-	private ast.Ast.MainClass.T parseMainClass() {
+	private ast.Ast.MainClass.MainClassSingle parseMainClass() {
 		// Lab1. Exercise 4: Fill in the missing code
 		// to parse a main class as described by the
 		// grammar above.
@@ -543,7 +539,7 @@ public class Parser {
 		String a = eatToken(Kind.TOKEN_ID);
 		eatToken(Kind.TOKEN_RPAREN);
 		eatToken(Kind.TOKEN_LBRACE);
-		ast.Ast.Stm.T stms = parseStatement();
+		java.util.LinkedList<ast.Ast.Stm.T> stms = parseStatements();
 		eatToken(Kind.TOKEN_RBRACE);
 		eatToken(Kind.TOKEN_RBRACE);
 		ast.Ast.MainClass.MainClassSingle mainclass = new ast.Ast.MainClass.MainClassSingle(
@@ -554,7 +550,7 @@ public class Parser {
 
 	// Program -> MainClass ClassDecl*
 	private ast.Ast.Program.ProgramSingle parseProgram() {
-		ast.Ast.MainClass.T mainclass = parseMainClass();
+		ast.Ast.MainClass.MainClassSingle mainclass = parseMainClass();
 		java.util.LinkedList<ast.Ast.Class.T> classes = parseClassDecls();
 		ast.Ast.Program.ProgramSingle prog = new ast.Ast.Program.ProgramSingle(mainclass, classes);
 		eatToken(Kind.TOKEN_EOF);
