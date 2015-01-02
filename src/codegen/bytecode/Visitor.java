@@ -1,12 +1,29 @@
 package codegen.bytecode;
 
-import codegen.bytecode.Ast.Class.ClassSingle;
-import codegen.bytecode.Ast.Dec.DecSingle;
-import codegen.bytecode.Ast.MainClass.MainClassSingle;
-import codegen.bytecode.Ast.Method.MethodSingle;
-import codegen.bytecode.Ast.Program.ProgramSingle;
-import codegen.bytecode.Ast.Stm.*;
-import codegen.bytecode.Ast.Type.*;
+
+import codegen.bytecode.Ast.Dec;
+import codegen.bytecode.Ast.MainClass;
+import codegen.bytecode.Ast.Method;
+import codegen.bytecode.Ast.Program;
+import codegen.bytecode.Ast.Stm.Aload;
+import codegen.bytecode.Ast.Stm.Areturn;
+import codegen.bytecode.Ast.Stm.Astore;
+import codegen.bytecode.Ast.Stm.Goto;
+import codegen.bytecode.Ast.Stm.Ificmplt;
+import codegen.bytecode.Ast.Stm.Ifne;
+import codegen.bytecode.Ast.Stm.Iload;
+import codegen.bytecode.Ast.Stm.Imul;
+import codegen.bytecode.Ast.Stm.Invokevirtual;
+import codegen.bytecode.Ast.Stm.Ireturn;
+import codegen.bytecode.Ast.Stm.Istore;
+import codegen.bytecode.Ast.Stm.Isub;
+import codegen.bytecode.Ast.Stm.LabelJ;
+import codegen.bytecode.Ast.Stm.Ldc;
+import codegen.bytecode.Ast.Stm.New;
+import codegen.bytecode.Ast.Stm.Print;
+import codegen.bytecode.Ast.Type;
+import codegen.bytecode.Ast.Class;
+
 
 public interface Visitor
 {
@@ -44,24 +61,24 @@ public interface Visitor
   public void visit(New s);
 
   // type
-  public void visit(ClassType t);
+  public void visit(Type.ClassType t);
 
-  public void visit(Int t);
+  public void visit(Type.Int t);
 
-  public void visit(IntArray t);
+  public void visit(Type.IntArray t);
 
   // dec
-  public void visit(DecSingle d);
+  public void visit(Dec.DecSingle d);
 
   // method
-  public void visit(MethodSingle m);
+  public void visit(Method.MethodSingle m);
 
   // class
-  public void visit(ClassSingle c);
+  public void visit(Class.ClassSingle c);
 
   // main class
-  public void visit(MainClassSingle c);
+  public void visit(MainClass.MainClassSingle c);
 
   // program
-  public void visit(ProgramSingle p);
+  public void visit(Program.ProgramSingle p);
 }

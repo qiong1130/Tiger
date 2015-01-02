@@ -1,8 +1,5 @@
 package codegen.C;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import codegen.C.Ast.Dec;
 import codegen.C.Ast.Type;
 
@@ -10,15 +7,15 @@ public class ClassBinding
 {
   public String extendss; // null for non-existing extends
   public boolean visited; // whether or not this class has been visited
-  public LinkedList<Tuple> fields; // all fields
-  public ArrayList<Ftuple> methods; // all methods
+  public java.util.LinkedList<Tuple> fields; // all fields
+  public java.util.ArrayList<Ftuple> methods; // all methods
 
   public ClassBinding(String extendss)
   {
     this.extendss = extendss;
     this.visited = false;
-    this.fields = new LinkedList<Tuple>();
-    this.methods = new ArrayList<Ftuple>();
+    this.fields = new java.util.LinkedList<Tuple>();
+    this.methods = new java.util.ArrayList<Ftuple>();
   }
 
   // put a single field
