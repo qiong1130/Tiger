@@ -217,7 +217,7 @@ public class Lexer {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		if (control.Control.dumpAst)
+		if (control.Control.ConLexer.dump)
 			System.out.println(t.toString());
 		return t;
 	}

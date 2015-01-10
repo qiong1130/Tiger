@@ -20,26 +20,26 @@ public class Fac {
 	// // main class: "Factorial"
 	static ast.Ast.MainClass.MainClassSingle factorial = new ast.Ast.MainClass.MainClassSingle(
 			"Factorial", "a",
-			new util.Flist<ast.Ast.Stm.T>().addAll(new ast.Ast.Stm.Print(
+			new util.Flist<ast.Ast.Stm.T>().list(new ast.Ast.Stm.Print(
 					new ast.Ast.Exp.Call(new ast.Ast.Exp.NewObject("Fac"),
 							"ComputeFac", new util.Flist<ast.Ast.Exp.T>()
-									.addAll(new ast.Ast.Exp.Num(10))))));
+									.list(new ast.Ast.Exp.Num(10))))));
 
 	
 	// // class "Fac"
 	static ast.Ast.Class.ClassSingle fac = new ast.Ast.Class.ClassSingle(
 			"Fac",
 			null,
-			new util.Flist<ast.Ast.Dec.T>().addAll(),
-			new util.Flist<ast.Ast.Method.T>().addAll(new ast.Ast.Method.MethodSingle(
+			new util.Flist<ast.Ast.Dec.T>().list(),
+			new util.Flist<ast.Ast.Method.T>().list(new ast.Ast.Method.MethodSingle(
 					new ast.Ast.Type.Int(),
 					"ComputeFac",
-					new util.Flist<ast.Ast.Dec.T>().addAll(new ast.Ast.Dec.DecSingle(
+					new util.Flist<ast.Ast.Dec.T>().list(new ast.Ast.Dec.DecSingle(
 							new ast.Ast.Type.Int(), "num")),
-					new util.Flist<ast.Ast.Dec.T>().addAll(new ast.Ast.Dec.DecSingle(
+					new util.Flist<ast.Ast.Dec.T>().list(new ast.Ast.Dec.DecSingle(
 							new ast.Ast.Type.Int(), "num_aux"),new ast.Ast.Dec.DecSingle(new ast.Ast.Type.IntArray(),"sdd")),
 					new util.Flist<ast.Ast.Stm.T>()
-							.addAll(new ast.Ast.Stm.If(
+							.list(new ast.Ast.Stm.If(
 									new ast.Ast.Exp.Lt(new ast.Ast.Exp.Id("num"),
 											new ast.Ast.Exp.Num(1)),
 									new ast.Ast.Stm.Assign("num_aux",
@@ -52,7 +52,7 @@ public class Fac {
 															new ast.Ast.Exp.This(),
 															"ComputeFac",
 															new util.Flist<ast.Ast.Exp.T>()
-																	.addAll(new ast.Ast.Exp.Sub(
+																	.list(new ast.Ast.Exp.Sub(
 																			new ast.Ast.Exp.Id(
 																					"num"),
 																			new ast.Ast.Exp.Num(
@@ -66,7 +66,7 @@ public class Fac {
 
 	// program
 	public static ast.Ast.Program.ProgramSingle prog = new ast.Ast.Program.ProgramSingle(factorial,
-			new util.Flist<ast.Ast.Class.T>().addAll(fac));
+			new util.Flist<ast.Ast.Class.T>().list(fac));
 	// Lab2, exercise 2: you should write some code to
 	// represent the program "test/Sum.java".
 	// Your code here:
@@ -79,20 +79,20 @@ public class Fac {
 	 * while (i<n) sum = sum + i; return sum; } }
 	 */
 	static ast.Ast.MainClass.MainClassSingle sum = new ast.Ast.MainClass.MainClassSingle("Sum",
-			"a", new util.Flist<ast.Ast.Stm.T>().addAll(new ast.Ast.Stm.Print(
+			"a", new util.Flist<ast.Ast.Stm.T>().list(new ast.Ast.Stm.Print(
 					new ast.Ast.Exp.Call(new ast.Ast.Exp.NewObject("Doit"), "doit",
-							new util.Flist<ast.Ast.Exp.T>().addAll(new ast.Ast.Exp.Num(
+							new util.Flist<ast.Ast.Exp.T>().list(new ast.Ast.Exp.Num(
 									101))))));
 
 	static ast.Ast.Class.ClassSingle doit = new ast.Ast.Class.ClassSingle("Doit", null,
-			new util.Flist<ast.Ast.Dec.T>().addAll(),
-			new util.Flist<ast.Ast.Method.T>().addAll(new ast.Ast.Method.MethodSingle(
+			new util.Flist<ast.Ast.Dec.T>().list(),
+			new util.Flist<ast.Ast.Method.T>().list(new ast.Ast.Method.MethodSingle(
 					new ast.Ast.Type.Int(), "doit", new util.Flist<ast.Ast.Dec.T>()
-							.addAll(new ast.Ast.Dec.DecSingle(new ast.Ast.Type.Int(), "n")),
-					new util.Flist<ast.Ast.Dec.T>().addAll(new ast.Ast.Dec.DecSingle(
+							.list(new ast.Ast.Dec.DecSingle(new ast.Ast.Type.Int(), "n")),
+					new util.Flist<ast.Ast.Dec.T>().list(new ast.Ast.Dec.DecSingle(
 							new ast.Ast.Type.Int(), "sum"), new ast.Ast.Dec.DecSingle(
 							new ast.Ast.Type.Int(), "i")),
-					new util.Flist<ast.Ast.Stm.T>().addAll(new ast.Ast.Stm.Assign("i",
+					new util.Flist<ast.Ast.Stm.T>().list(new ast.Ast.Stm.Assign("i",
 							new ast.Ast.Exp.Num(0)), new ast.Ast.Stm.Assign("sum",
 							new ast.Ast.Exp.Num(0)), new ast.Ast.Stm.While(
 							new ast.Ast.Exp.Lt(new ast.Ast.Exp.Id("i"), new ast.Ast.Exp.Id(
@@ -103,5 +103,5 @@ public class Fac {
 
 	// program
 	public static ast.Ast.Program.ProgramSingle sum_prog = new ast.Ast.Program.ProgramSingle(sum,
-			new util.Flist<ast.Ast.Class.T>().addAll(doit));
+			new util.Flist<ast.Ast.Class.T>().list(doit));
 }

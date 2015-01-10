@@ -430,7 +430,7 @@ public class ElaboratorVisitor implements ast.Visitor {
 		java.util.Set<String> toUseVariable = this.methodTable.get(m.id)
 				.getTable().keySet();
 		usedVariable = new java.util.LinkedHashSet<String>();
-		if (control.Control.elabMethodTable) {
+		if (control.Control.ConAst.elabMethodTable) {
 			System.out.println("method " + m.id + "() has these variables:");
 			this.methodTable.get(m.id).dump();
 		}
@@ -511,7 +511,7 @@ public class ElaboratorVisitor implements ast.Visitor {
 		}
 
 		// we can double check that the class table is OK!
-		if (control.Control.elabClassTable) {
+		if (control.Control.ConAst.elabClassTable) {
 			this.classTable.dump();
 		}
 

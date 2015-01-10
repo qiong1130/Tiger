@@ -1,3 +1,6 @@
+import static control.Control.ConAst.testFac;
+import static control.Control.ConAst.dumpAst;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -26,7 +29,7 @@ public class Tiger {
 
 		// /////////////////////////////////////////////////////
 		// to test the pretty printer on the "test/Fac.java" program
-		if (control.Control.testFac) {
+		if (testFac) {
 			parser = new Parser();
 			System.out
 					.println("Testing the Tiger compiler on Fac.java starting:");
@@ -40,19 +43,46 @@ public class Tiger {
 			ast.Fac.prog.accept(elab);
 
 			// Compile this program to C.
-			System.out.println("Translate the program to C");
-			codegen.C.TranslateVisitor trans2C = new codegen.C.TranslateVisitor();
-			// pass this visitor to the "Fac.java" program.
-			ast.Fac.prog.accept(trans2C);
-			// this visitor will return an AST for C.
-			Program.T cast = trans2C.program;
-			// output the AST for C.
-			codegen.C.PrettyPrintVisitor ppc = new codegen.C.PrettyPrintVisitor();
-			cast.accept(ppc);
+			System.out.println("code generation starting");
+			 // code generation
+//			codegen.C.TranslateVisitor trans2C = new codegen.C.TranslateVisitor();
+//			// pass this visitor to the "Fac.java" program.
+//			ast.Fac.prog.accept(trans2C);
+//			// this visitor will return an AST for C.
+//			Program.T cast = trans2C.program;
+//			// output the AST for C.
+//			codegen.C.PrettyPrintVisitor ppc = new codegen.C.PrettyPrintVisitor();
+//			cast.accept(ppc);
 
 			// ast.Fac.sum_prog.accept(pp);
 			// ast.Fac.prog.accept(pp);
 			// ast.Fac.sum_prog.accept(pp);
+			 switch (control.Control.ConCodeGen.codegen) {
+		      case Bytecode:
+		        System.out.println("bytecode codegen");
+		        codegen.bytecode.TranslateVisitor trans = new codegen.bytecode.TranslateVisitor();
+		        ast.Fac.prog.accept(trans);
+		        codegen.bytecode.Ast.Program.T bytecodeAst = trans.program;
+		        codegen.bytecode.PrettyPrintVisitor ppbc = new codegen.bytecode.PrettyPrintVisitor();
+		        bytecodeAst.accept(ppbc);
+		        break;
+		      case C:
+		        System.out.println("C codegen");
+		        codegen.C.TranslateVisitor transC = new codegen.C.TranslateVisitor();
+		        ast.Fac.prog.accept(transC);
+		        codegen.C.Ast.Program.T cAst = transC.program;
+		        codegen.C.PrettyPrintVisitor ppc = new codegen.C.PrettyPrintVisitor();
+		        cAst.accept(ppc);
+		        break;
+		      case Dalvik:
+		        // similar
+		        break;
+		      case X86:
+		        // similar
+		        break;
+		      default:
+		        break;
+		      }
 			System.out
 					.println("Testing the Tiger compiler on Fac.java finished.");
 			System.exit(1);
@@ -62,12 +92,12 @@ public class Tiger {
 			cmd.usage();
 			return;
 		}
-		Control.fileName = fname;
+		Control.ConCodeGen.fileName = fname;
 
 		// /////////////////////////////////////////////////////
 		// it would be helpful to be able to test the lexer
 		// independently.
-		if (control.Control.testlexer) {
+		if (Control.ConLexer.test) {
 			System.out.println("Testing the lexer. All tokens:");
 			try {
 				fstream = new BufferedInputStream(new FileInputStream(fname));
@@ -102,7 +132,7 @@ public class Tiger {
 		}
 
 		// pretty printing the AST, if necessary
-		if (control.Control.dumpAst) {
+		if (dumpAst) {
 			ast.PrettyPrintVisitor pp = new ast.PrettyPrintVisitor();
 			theAst.accept(pp);
 		}
@@ -112,7 +142,7 @@ public class Tiger {
 		theAst.accept(elab);
 
 		// code generation
-		switch (control.Control.codegen) {
+		switch (control.Control.ConCodeGen.codegen) {
 		case Bytecode:
 			codegen.bytecode.TranslateVisitor trans = new codegen.bytecode.TranslateVisitor();
 			theAst.accept(trans);
@@ -127,6 +157,9 @@ public class Tiger {
 			Program.T cAst = transC.program;
 			codegen.C.PrettyPrintVisitor ppc = new codegen.C.PrettyPrintVisitor();
 			cAst.accept(ppc);
+			break;
+		case Dalvik:
+			// similar
 			break;
 		case X86:
 			// similar
@@ -156,7 +189,7 @@ public class Tiger {
 	    String temp ;
 	    System.out.println("Now Compiling C code using GCC...");
 		
-		String cmdstr = "gcc -o " + Control.fileName + ".out " + Control.fileName + ".c " + "runtime/runtime.c";
+		String cmdstr = "gcc -o " + Control.ConCodeGen.fileName + ".out " + Control.ConCodeGen.fileName + ".c " + "runtime/runtime.c";
 		//System.out.println(cmdstr);
 	   // String cmdstr = "gcc -o " + "a.out " + "a.c " + "runtime/runtime.c";
 		p = Runtime.getRuntime().exec(cmdstr);
@@ -167,7 +200,7 @@ public class Tiger {
 		}
 		System.out.println(sb);
 
-		System.out.println("Compile ended. Output file is \"" + Control.fileName + ".out\". You can run it now.");
+		System.out.println("Compile ended. Output file is \"" + Control.ConCodeGen.fileName + ".out\". You can run it now.");
 		return;
 	}
 }

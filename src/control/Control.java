@@ -1,31 +1,47 @@
 package control;
 
+import control.Control.ConCodeGen.Kind_t;
+import control.Control.ConSlp.T;
+
 public class Control
 {
-  // source file
-  public static String fileName = null;
+	// the lexer
+	public static class ConLexer
+	  {
+	    public static boolean test = false;
+	    public static boolean dump = false;
+	  }
+	
+	 // the straight-line program interpreter
+	  public static class ConSlp
+	  {
+	    public enum T{NONE, ARGS, INTERP, COMPILE, TEST, DIV};
+	    
+	    public static T action = T.NONE;
+	    public static boolean div = false;
+	    public static boolean keepasm = false;
+	  }
+	  // Ast and elaborator
+	  public static class ConAst
+	  {
+	    public static boolean dumpAst = false;
+	    public static boolean testFac = false;
 
-  // compiler testing and debugging
-  public static boolean testlexer = false;
-  public static boolean testFac = false;
+	    // elaborator
+	    public static boolean elabClassTable = false;
+	    public static boolean elabMethodTable = false;
+	  }  
+	  
+	  public static class ConCodeGen
+	  {
+	    public static String fileName = null;
 
-  // lexer and parser
-  public static boolean lex = false;
+	    public static String outputName = null;
 
-  // ast
-  public static boolean dumpAst = false;
-
-  // elaborator
-  public static boolean elabClassTable = false;
-  public static boolean elabMethodTable = false;
-
-  // code generator
-  public static String outputName = null;
-
-  public enum Codegen_Kind_t {
-    Bytecode, C, X86
-  }
-
-  public static Codegen_Kind_t codegen = Codegen_Kind_t.C;
-
+	    public static enum Kind_t {
+	      Bytecode, C, Dalvik, X86
+	    }
+	    
+	    public static Kind_t codegen = Kind_t.C;
+	  }
 }

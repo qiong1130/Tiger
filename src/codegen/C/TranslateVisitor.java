@@ -1,6 +1,5 @@
 package codegen.C;
 
-
 import codegen.C.Ast.Dec;
 import codegen.C.Ast.Exp;
 import codegen.C.Ast.MainMethod;
@@ -11,7 +10,6 @@ import codegen.C.Ast.Type;
 import codegen.C.Ast.Vtable;
 import codegen.C.Ast.Class;
 import util.Temp;
-
 
 // Given a Java ast, translate it into a C ast and outputs it.
 
